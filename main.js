@@ -8,7 +8,7 @@ deleteProduct.addEventListener("click", function (e) {
   createAndShowModal();
 });
 
-function createAndShowModal(onConfirm) {
+function createAndShowModal() {
   modal = document.createElement("div");
   const modalQuestion = document.createElement("p");
   const yesBtn = document.createElement("button");
@@ -24,7 +24,7 @@ function createAndShowModal(onConfirm) {
 function setModalElement(modalQuestion, yesBtn, cancelBtn) {
   modal.className = "modal";
   yesBtn.className = "yes-btn";
-  cancelBtn = "cancel-btn";
+  cancelBtn.className = "cancel-btn";
 
   modalQuestion.textContent = "Are you sure to delete this product ?";
   yesBtn.textContent = "Yes";
