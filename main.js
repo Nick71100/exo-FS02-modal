@@ -9,30 +9,37 @@ deleteProduct.addEventListener("click", function (e) {
 });
 
 function createAndShowModal(onConfirm) {
-  const modal = document.createElement("div");
-  modal.classList.add("modal");
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
+  modal = document.createElement("div");
   const modalQuestion = document.createElement("p");
-  modalQuestion.textContent = "Are you sure to delete this product ?";
   const yesBtn = document.createElement("button");
-  yesBtn.textContent = "Yes";
   const cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "Cancel";
 
-  yesBtn.addEventListener("clique", () => {
-    onConfirm();
-    document.body.removeChild(modal);
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    document.body.removeChild(modal);
-  });
-
-  modalContent.appendChild(modalQuestion);
-  modalContent.appendChild(yesBtn);
-  modalContent.appendChild(cancelBtn);
-  modal.appendChild(modalContent);
-
+  setModalElement(modalQuestion, yesBtn, cancelBtn);
+  modal.append(modalQuestion, yesBtn, cancelBtn);
   document.body.appendChild(modal);
+
+  addEventToModal(yesBtn, cancelBtn);
+}
+
+function setModalElement(modalQuestion, yesBtn, cancelBtn) {
+  modal.className = "modal";
+  yesBtn.className = "yes-btn";
+  cancelBtn = "cancel-btn";
+
+  modalQuestion.textContent = "Are you sure to delete this product ?";
+  yesBtn.textContent = "Yes";
+  cancelBtn.textContent = "Cancel";
+}
+
+function addEventToModal(...buttons) {
+  for (const button of buttons) {
+    button.addEventListener("click", interactModal);
+  }
+}
+
+function interactModal(e) {
+  if (e.target.classList.contains("yes-btn")) {
+    productToDelete.remove();
+  }
+  modal.remove();
 }
